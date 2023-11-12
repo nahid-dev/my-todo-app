@@ -14,6 +14,18 @@ const tasks = [
     id: 3,
     name: "Sale report",
   },
+  {
+    id: 4,
+    name: "TM sale link update",
+  },
+  {
+    id: 5,
+    name: "FOE stock link update",
+  },
+  {
+    id: 6,
+    name: "FOE sale link update",
+  },
 ];
 
 function App() {
@@ -25,12 +37,10 @@ function App() {
   const day = currentDate.getDate();
 
   const handleClick = (taskId) => {
-    if (!completeStatus[taskId]) {
-      setCompleteStatus((prevStatus) => ({
-        ...prevStatus,
-        [taskId]: true,
-      }));
-    }
+    setCompleteStatus((prevStatus) => ({
+      ...prevStatus,
+      [taskId]: true,
+    }));
   };
 
   useEffect(() => {
@@ -43,12 +53,19 @@ function App() {
   return (
     <div className="flex items-center justify-center h-screen w-full px-3">
       <div className="card w-96 shadow-md border p-5">
-        <ul>
+        <div className="my-3">
+          <h2 className="text-xl font-bold">
+            Date: {currentDate.toLocaleDateString()}
+          </h2>
+        </div>
+        <ul className="space-y-4">
           {tasks.map((task) => (
             <li
               key={task.id}
               className={
-                completeStatus[task.id] ? "bg-green-400" : "bg-gray-100"
+                completeStatus[task.id]
+                  ? "bg-green-400 text-white p-2 font-medium"
+                  : "bg-gray-100 p-2 font-medium"
               }
               onClick={() => handleClick(task.id)}
             >
